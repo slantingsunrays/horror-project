@@ -6,9 +6,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
    
   </head>
+    
+  <style>
+  html, body{
+    margin:0; 
+    padding:0; 
+    background-image: url('html-assets/woods.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  audio{
+    box-shadow: 5px 5px 20px rgba(0,0, 0, 0.4);
+    border-radius: 90px;
+    transform: scale(1.05);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:50px;
+    width: 40%;
+  }
+ 
+  </style>
   <body>
     
     <div id="app"></div>
+    <audio controls>
+      <source src="html-assets/woods-sound.mp3"  type="audio/mp3">       
+    </audio>
+    
     
     <!-- built files will be auto injected -->
   </body>

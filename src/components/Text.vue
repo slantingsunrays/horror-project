@@ -1,12 +1,15 @@
 <template>
-<div>
-    <h1>Adventure Area</h1>
-    <h2>{{currentLocation.name}}</h2>
-    <p>{{currentLocation.text}}</p>
+<div class="adventure">
+    <h1 class="title"><span>The Woods Are Lovely, Dark and Deep</span></h1>    
+    <div class="container"> 
+        <h2>{{currentLocation.name}}</h2>
+        <p>{{currentLocation.text}}</p>        
+        <p>{{message}}</p>
+        <p>{{useMessage}}</p>
+        <input type="text" id="input" v-on:keydown.enter="performAction" v-model="userInput">
+        <p>{{error}}</p>
+    </div>
     
-    <p>{{message}}</p>
-    <input type="text" v-on:keydown.enter="performAction" v-model="userInput">
-    <p>{{error}}</p>
 </div>
   
 </template>
@@ -24,9 +27,9 @@ name:'adventure',
             },
             locations:locations,
             error:'', 
-            // toolName:'', 
             message:'', 
-            userInput:null 
+            userInput:null,
+            useMessage:''
         }
     },
     created(){
@@ -77,6 +80,7 @@ name:'adventure',
                       this.error="You can't enter here" 
                     }
                 break;
+                
 
                 case 'exit': 
                     if(this.currentLocation.exit!==null){
@@ -86,7 +90,8 @@ name:'adventure',
                     }
                 break;
                 
-                case 'pick up the '+ this.currentLocation.pickUp: 
+                // case 'pick up the '+ this.currentLocation.pickUp: 
+                case 'pick up': 
                     if(this.currentLocation.pickUp!==null){
                         this.message="You picked up "+ this.currentLocation.pickUp
                     }else{
@@ -94,27 +99,37 @@ name:'adventure',
                     }
                 break;
 
-                case 'use ' +this.currentLocation.tool: 
+                // case 'use ' +this.currentLocation.tool: 
+                case 'use': 
                     if(this.currentLocation.use!==null){
                         this.message=this.currentLocation.use 
+                        
                     }else{
                       this.error="There's nothing you can use right now" 
                     }
                 break;
 
-                case 'run': 
-                    if(this.currentLocation.run!==null){
-                        this.currentLocation=this.locations[this.currentLocation.run]; 
+                case 'interact': 
+                    if(this.currentLocation.interact!==null){
+                        this.currentLocation=this.locations[this.currentLocation.interact]; 
                     }else{
-                      this.error="You can't run right now" 
+                      this.error="There's no one to interact with right now" 
                     }
                 break;
                 
-                case 'fight': 
+                case 'run': 
                     if(this.currentLocation.run!==null){
-                        this.currentLocation=this.locations[this.currentLocation.fight]; 
+                        this.message=this.currentLocation.run; 
                     }else{
-                      this.error="You can't fight right now" 
+                      this.error="There's no one to interact with right now" 
+                    }
+                break;
+               
+                case 'restart': 
+                    if(this.currentLocation.restart!==null){
+                        this.currentLocation=this.locations[this.currentLocation.restart]; 
+                    }else{
+                      this.error="You can't do that right now"
                     }
                 break;
                 default:
@@ -130,7 +145,44 @@ name:'adventure',
 }
 </script>
 
-<style  scoped>
+<style scoped>
+
+
+
+.container{
+    color:whitesmoke; 
+    margin:10px;
+    background-color:#222;
+    border:5px solid;    
+    padding:30px; 
+    width:1000px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:50px;
+    width: 40%; 
+    
+
+}
+.title{
+    color:whitesmoke;
+   
+
+}
+
+
+
+span{
+    border-bottom: 5px solid whitesmoke; 
+    margin-top:10px; 
+}
+input{
+    height:30px; 
+    background-color:whitesmoke;
+    font-size: 1.2em; 
+    margin-top:20px; 
+
+}
 
 </style>>
 
